@@ -86,28 +86,33 @@ const Calculator = () => {
   };
 
   return (
-    <div className="calculadora">
-      <div className="pantalla">{result}</div>
+    <>
+      <div className="title">
+        <p>Calculadora</p>
+      </div>
+      <div className="calculadora">
+        <div className="pantalla">{result}</div>
 
-      <Delete onClick={handleDeleteClick} />
-      <Operation onClick={handleOperationClick}>%</Operation>
-      <Operation onClick={handleOperationClick}>÷</Operation>
-      <Number onClick={handleNumberClick}>7</Number>
-      <Number onClick={handleNumberClick}>8</Number>
-      <Number onClick={handleNumberClick}>9</Number>
-      <Operation onClick={handleOperationClick}>*</Operation>
-      <Number onClick={handleNumberClick}>4</Number>
-      <Number onClick={handleNumberClick}>5</Number>
-      <Number onClick={handleNumberClick}>6</Number>
-      <Operation onClick={handleOperationClick}>-</Operation>
-      <Number onClick={handleNumberClick}>1</Number>
-      <Number onClick={handleNumberClick}>2</Number>
-      <Number onClick={handleNumberClick}>3</Number>
-      <Operation onClick={handleOperationClick}>+</Operation>
-      <Number onClick={handleNumberClick}>0</Number>
-      <Dot onClick={handleDotClick} />
-      <Result onClick={handleResultClick} />
-    </div>
+        <Delete onClick={handleDeleteClick} />
+        <Operation onClick={handleOperationClick}>%</Operation>
+        <Operation onClick={handleOperationClick}>÷</Operation>
+        <Number onClick={handleNumberClick}>7</Number>
+        <Number onClick={handleNumberClick}>8</Number>
+        <Number onClick={handleNumberClick}>9</Number>
+        <Operation onClick={handleOperationClick}>*</Operation>
+        <Number onClick={handleNumberClick}>4</Number>
+        <Number onClick={handleNumberClick}>5</Number>
+        <Number onClick={handleNumberClick}>6</Number>
+        <Operation onClick={handleOperationClick}>-</Operation>
+        <Number onClick={handleNumberClick}>1</Number>
+        <Number onClick={handleNumberClick}>2</Number>
+        <Number onClick={handleNumberClick}>3</Number>
+        <Operation onClick={handleOperationClick}>+</Operation>
+        <Number onClick={handleNumberClick}>0</Number>
+        <Dot onClick={handleDotClick} />
+        <Result onClick={handleResultClick} />
+      </div>
+    </>
   );
 };
 
