@@ -1,105 +1,114 @@
+import "./calculator.css";
 import Number from "./Number";
-import Calculator from "./Number copy";
 import Operation from "./Operation";
+import Result from "./Result";
+import Delete from "./Delete";
+import Dot from "./Dot";
 import { useState } from "react";
 
-function Calculator  () {
-    const onButtonClick = (number) => () =>{
-        onClick(number)
-    }
-        
-      const onOperationClick = (operation) => {
-        onClick(operation)
-    
+const Calculator = () => {
+  const [operador1, setOperador1] = useState("0");
+  const [operador2, setOperador2] = useState("");
+  const [operation, setOperation] = useState("");
+  const [replaceNext, setReplaceNext] = useState(false);
+
+  const result = operador2 || operador1;
+
+  const handleNumberClick = (number) => {
+    if (operation == "") {
+      if (operador1 === "0" || replaceNext) {
+        setOperador1(number);
+        setReplaceNext(false);
+      } else {
+        setOperador1(operador1 + number); //lo concatena porque son strings
       }
-    const [operador1, setOperador1] = useState(0)
-    const [operador2, setOperador2] = useState("")
-    const [operation, setOperation] = useState("")
-    const [result, setResult] = useState("0")
+    } else {
+      if (operador2 === "0") {
+        setOperador2(number);
+      } else {
+        setOperador2(operador2 + number);
+      }
+    }
+  };
 
-    let inputNum = e.target.value;
+  //coloca la operacion
+  const handleOperationClick = (operation) => {
+    if (operador2 !== "") {
+      handleResultClick();
+      setOperation(operation);
+    } else if (operador1 != "") {
+      setOperation(operation);
+    }
+  };
 
-    function handleChange(e) {
-        if(operation == ""){
-            if(operador1 === "0"){
-                setOperador1(inputNum)   
-            }else {
-                setOperador1(operador1 + 1)
-            } 
-            setOperador1(operador1)
-        }
-         else {
-            if(operador2 === "0"){
-             setOperador2(inputNum)
-            }else {
-                setOperador2(operador2 + 1)}
-                setOperador2(operador2)
-        }
+  const handleResultClick = () => {
+    const number1 = parseFloat(operador1);
+    const number2 = parseFloat(operador2);
+    let result = 0;
+
+    if (operation == "+") {
+      result = number1 + number2;
+    } else if (operation == "-") {
+      result = number1 - number2;
+    } else if (operation == "*") {
+      result = number1 * number2;
+    } else if (operation == "÷") {
+      result = number1 / number2;
+    } else if (operation == "%") {
+      result = number1 / 100;
+    } else if (operation == "%") {
+      result = number1 / 100;
     }
 
-    function clear(){
-        setOperador1(0);
-        setOperador2 = "";
-        operation = "";
-        inputNum = setOperador1
+    setOperador1(`${result}`);
+    setOperador2("");
+    setOperation("");
+    setReplaceNext(true);
+  };
+
+  const handleDeleteClick = () => {
+    setReplaceNext(false);
+    setOperador1("0");
+    setOperador2("");
+    setOperation("");
+  };
+
+  const handleDotClick = () => {
+    if (operation == "") {
+      if (!operador1.includes(".")) {
+        setOperador1(operador1 + ".");
+      }
+    } else {
+      if (!operador2.includes(".")) {
+        setOperador2(operador2 + ".");
+      }
     }
+  };
 
-    function porcentage(){
-        setOperador1(operador1 / 100);
-    }
+  return (
+    <div className="calculadora">
+      <div className="pantalla">{result}</div>
 
-    function operation(e){
-        let operationInput = e.target.value;
-        setOperation(operationInput);
-        setOperador2(operador1);
-        setOperador1(0); 
-    }
-
-    function calculate() {
-        if (operation === "/") {
-          setOperador2(parseFloat(operador1) / parseFloat(operador2));
-        } else if (operation === "X") {
-          setOperador2(parseFloat(operador1) * parseFloat(operador2));
-        } else if (operation === "-") {
-            console.log(operador1)
-            console.log(operador2)
-            console.log(operador1-operador2)
-          setOperador2(parseFloat(operador1) - parseFloat(operador2));
-        } else if (operation === "+") {
-          setOperador2(parseFloat(operador1) + parseFloat(operador2));
-        }
-    }
-
-    
-    return(
-        
-    <div>
-    <input className="result">{num}</input>
-      <Operation onClick={onOperationClick} operation={"/"}/>
-      <Number onClick={onButtonClick} value={7}/>
-      <Number onClick={onButtonClick} value={8}/>
-      <Number onClick={onButtonClick} value={9}/>
-      <Operation onClick={onOperationClick} operation={"÷"}/>
-      <Number onClick={onButtonClick} value={4}/>
-      <Number onClick={onButtonClick} value={5}/>
-      <Number onClick={onButtonClick} value={6}/>
-      <Operation onClick={onOperationClick} operation={"-"}/>
-      <Number onClick={onButtonClick} value={1}/>
-      <Number onClick={onButtonClick} value={2}/>
-      <Number onClick={onButtonClick} value={3}/>
-      <Operation onClick={onOperationClick} operation={"+"}/>
-      <Number onClick={onButtonClick} value={0} />
-      <Operation onClick={onOperationClick} operation="." />
-      <Result onClick={calculate}/>
-
+      <Delete onClick={handleDeleteClick} />
+      <Operation onClick={handleOperationClick}>%</Operation>
+      <Operation onClick={handleOperationClick}>÷</Operation>
+      <Number onClick={handleNumberClick}>7</Number>
+      <Number onClick={handleNumberClick}>8</Number>
+      <Number onClick={handleNumberClick}>9</Number>
+      <Operation onClick={handleOperationClick}>*</Operation>
+      <Number onClick={handleNumberClick}>4</Number>
+      <Number onClick={handleNumberClick}>5</Number>
+      <Number onClick={handleNumberClick}>6</Number>
+      <Operation onClick={handleOperationClick}>-</Operation>
+      <Number onClick={handleNumberClick}>1</Number>
+      <Number onClick={handleNumberClick}>2</Number>
+      <Number onClick={handleNumberClick}>3</Number>
+      <Operation onClick={handleOperationClick}>+</Operation>
+      <Number onClick={handleNumberClick}>0</Number>
+      <Dot onClick={handleDotClick} />
+      <Result onClick={handleResultClick} />
     </div>
-  
-  
-  )
+  );
+};
 
-
-        
-         
-        
-}
-export default Calculator
+export default Calculator;

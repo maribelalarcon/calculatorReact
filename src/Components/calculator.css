@@ -1,3 +1,7 @@
+body{
+    display: grid;
+    background-color: #2b2d42;
+}
 .calculadora{
     display: grid;
     grid-template-columns: repeat(4, 88px);
@@ -23,4 +27,30 @@
     border-radius: 0.5px;
     font-weight: 600;
     font-size: 30px;
+}
+
+.btn{
+    font-size: 30px;
+    color: #f6f6f6;
+    border-radius: 180px;
+    padding: 1.5px 0.5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: #333333;
+}
+
+.wide{
+    grid-column: span 2;
+    padding: 15px 5px;
+}
+
+.orange{
+    background-color: #cc7e0e;
+}
+
+.light{
+    background-color: #a5a5a5;
+    color: #101010;
 }

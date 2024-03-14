@@ -1,20 +1,7 @@
-import Calculator from "./Calculator.jsx"
-
+import Calculator from "./Calculator";
 
 function App() {
-
-
-  return (
-    <Calculator/>
-  
-  
-  )
-
-  
-
-
+  return <Calculator />;
 }
-  
 
-
-export default App
+export default App;

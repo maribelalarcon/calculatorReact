@@ -1,10 +1,8 @@
-function Result({onClick, operation}){
-    const handleClick = () => {
-        onClick(operation)
-    }
-    return(
-          <button className="button" onClick={handleClick}>{operation}</button>
-    )
-    
+function Result({ onClick }) {
+  return (
+    <button className="btn wide" onClick={onClick}>
+      =
+    </button>
+  );
 }
-export default Result
+export default Result;

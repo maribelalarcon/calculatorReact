@@ -1,15 +1,12 @@
-import "./Button.css";
-
-function Number({ onClick, number }) {
+function Number({ onClick, children }) {
   const handleClick = () => {
-    onClick(number);
+    onClick(children);
   };
   return (
-    <button className="button" onClick={handleClick}>
-      {number}
+    <button className="btn" onClick={handleClick}>
+      {children}
     </button>
   );
-
-  // <button onClick={() => onClick(children)}>{children}</button>
 }
+
 export default Number;
